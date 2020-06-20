@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-//Vamos construir aqui o nosso primeiro Schema
-const UserSchema = new mongoose.Schema({
+
+const UserSchema = new mongoose.Schema({//construindo aqui o nosso primeiro Schema
     name: {
         type: String, //Define o tipo do campo como String
         require: true //Campo obrigatório
@@ -23,7 +23,58 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-//Transformamos o nosso modelo Schema em uma constante
-const User = mongoose.model('User', UserSchema);
+const UserData = mongoose.model('User', UserSchema); //Transformamos o nosso modelo Schema em uma constante
+
+class User{//Aqui declaramos as funções do mongo que podem ser utilizadas no schema
+
+
+    //Create
+    static newUser(data){
+		return new Promise((resolve, reject) => {
+			UserData.create(data).then((result) => {
+				resolve(result);
+			})
+			.catch((error) => {
+				reject(error);
+			});
+		});
+    }
+    
+    //Read
+    static getAllUsers(){
+        return new Promise((resolve, reject) => {
+            UserData.find({}).then((results)=> {
+                resolve(results);
+            }).catch((error)=> {
+             reject(error);
+                console.log(error);
+             });
+        });
+    }
+
+    //Update
+    static updateUser(id, user) {
+        return new Promise((resolve, reject) => {
+            UserData.findByIdAndUpdate(id, user).then(() => {
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    //Delete
+    static deleteUser(id) {
+        return new Promise((resolve, reject) => {
+            UserData.findOneAndDelete(id).then(() => {
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+       });
+    }
+
+    
+}
 
 module.exports = User;
