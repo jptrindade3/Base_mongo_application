@@ -12,8 +12,8 @@ Métodos HTTP
 */
 
 routes.post('/register', userController.create);
-routes.delete('/register', userController.delete);
-routes.get('/list', userController.list);
-
+routes.get('/register', userController.read);
+routes.put('/register/:id', userController.update);
+routes.delete('/register/:id', userController.delete);
 
 module.exports = routes;

@@ -1,22 +1,43 @@
-const User = require('../models/User');
-const { create } = require('../models/User');
+const User = require('../models/User');//Importando model User (schema e função)
 
 module.exports = {
-    async create(req, res){
-        try{
-            const user = await User.create(req.body);
-    
-            return res.send({user});
-        }catch (err){
-            return res.status(400).send({ error: 'Registration failed'});
-        }
+    create(req, res){
+        const user = req.body;
+
+        User.newUser(user).then((createdUser) => {
+            return res.send({createdUser});
+        }).catch((error) => {
+            console.log(error);
+        });
     },
 
-    async delete(req, res){
-
+    read(req, res){
+        User.getAllUsers().then((allUsers) =>{
+            return res.send({allUsers});
+        }).catch((error) => {
+            console.log(error);
+        });
     },
 
-    async list(req, res){
+    update(req, res){
+        const userId = req.params.id;
+        const userNewData = req.body;
 
+        User.updateUser(userId, userNewData).then(() => {
+            return res.send({message: 'Usuário atualizado com sucesso'});
+        }).catch((error) => {
+            console.log(error);
+        });
     },
+
+    delete(req, res){
+        const userId = req.params.id;
+
+        User.deleteUser(userId).then(() => {
+            return res.send({message:`Usuário ${userId} excluido com sucesso!`});
+        }).catch((error) => {
+            console.log(error);
+        });
+    },
+  
 };
