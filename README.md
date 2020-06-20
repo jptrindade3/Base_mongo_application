@@ -1,9 +1,7 @@
 Base_mongo_application
 
 Pré-requisitos:
-
 1- nodejs instalado
-
 2- cluster no MongoDB Atlas
 
 
