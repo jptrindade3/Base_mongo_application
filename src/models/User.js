@@ -66,7 +66,7 @@ class User{//Aqui declaramos as funções do mongo que podem ser utilizadas no s
     //Delete
     static deleteUser(id) {
         return new Promise((resolve, reject) => {
-            UserData.findOneAndDelete(id).then(() => {
+            UserData.findByIdAndDelete(id).then(() => {
                 resolve();
             }).catch((err) => {
                 reject(err);
