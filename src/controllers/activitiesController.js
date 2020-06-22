@@ -24,7 +24,7 @@ module.exports = {
         const activityNewData = req.body;
 
         Activities.updateActivities(activityId, activityNewData).then(() => {
-            return res.send({message: 'Usuário atualizado com sucesso'});
+            return res.send({message: 'Atividade atualizada com sucesso'});
         }).catch((error) => {
             console.log(error);
         });
@@ -34,7 +34,7 @@ module.exports = {
         const activityId = req.params.id;
 
         Activities.deleteActivities(activityId).then(() => {
-            return res.send({message:`Usuário ${activityId} excluido com sucesso!`});
+            return res.send({message:`Atividade ${activityId} excluida com sucesso!`});
         }).catch((error) => {
             console.log(error);
         });
