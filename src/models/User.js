@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({//construindo aqui o nosso primeiro Schema
     name: {
         type: String, //Define o tipo do campo como String
-        require: true //Campo obrigatório
+        required: true //Campo obrigatório
     },
     email: {
         type: String,
